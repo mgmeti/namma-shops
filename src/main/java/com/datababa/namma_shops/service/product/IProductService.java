@@ -2,6 +2,7 @@ package com.datababa.namma_shops.service.product;
 
 import com.datababa.namma_shops.model.Product;
 import com.datababa.namma_shops.request.AddProductRequest;
+import com.datababa.namma_shops.request.ProductUpdateRequest;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public interface IProductService {
 
     void deleteProductById(Long id);
 
-    void updateProduct(Product product, Long productId);
+    Product updateProduct(ProductUpdateRequest request, Long productId);
 
     List<Product> getAllProducts();
     List<Product> getProductsByCategory(String category);
