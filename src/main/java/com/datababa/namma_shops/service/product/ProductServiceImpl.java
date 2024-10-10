@@ -58,6 +58,20 @@ public class ProductServiceImpl implements IProductService {
 
     }
 
+    /**
+     * Updates an existing product with the provided data in the {@link ProductUpdateRequest}.
+     *
+     * @param request the {@link ProductUpdateRequest} containing the new product data
+     *                to update the existing product.
+     * @param productId the ID of the product to be updated.
+     * @return        the updated {@link Product} after saving it to the database.
+     * @throws ProductNotFoundException if a product with the given ID does not exist in the repository.
+     *
+     *  @see Product
+     *  @see ProductUpdateRequest
+     *  @see ProductRepository
+     *  @see ProductNotFoundException
+     */
     @Override
     public Product updateProduct(ProductUpdateRequest  request, Long productId) {
          return productRepository.findById(productId)
