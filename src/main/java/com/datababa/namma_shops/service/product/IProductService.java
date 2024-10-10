@@ -2,7 +2,6 @@ package com.datababa.namma_shops.service.product;
 
 import com.datababa.namma_shops.model.Product;
 import com.datababa.namma_shops.request.AddProductRequest;
-import jakarta.persistence.Lob;
 
 import java.util.List;
 

@@ -7,7 +7,6 @@ import com.datababa.namma_shops.repository.CategoryRepository;
 import com.datababa.namma_shops.repository.ProductRepository;
 import com.datababa.namma_shops.request.AddProductRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
