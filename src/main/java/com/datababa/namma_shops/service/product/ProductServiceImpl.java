@@ -1,13 +1,18 @@
 package com.datababa.namma_shops.service.product;
 
+import com.datababa.namma_shops.dto.ImageDto;
+import com.datababa.namma_shops.dto.ProductDto;
 import com.datababa.namma_shops.exceptions.ProductNotFoundException;
 import com.datababa.namma_shops.model.Category;
+import com.datababa.namma_shops.model.Image;
 import com.datababa.namma_shops.model.Product;
 import com.datababa.namma_shops.repository.CategoryRepository;
+import com.datababa.namma_shops.repository.ImageRepository;
 import com.datababa.namma_shops.repository.ProductRepository;
 import com.datababa.namma_shops.request.AddProductRequest;
 import com.datababa.namma_shops.request.ProductUpdateRequest;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +24,10 @@ public class ProductServiceImpl implements IProductService {
 
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
+
+    private  final ImageRepository imageRepository;
+
+    private final ModelMapper modelMapper;
 
     @Override
     public Product addProduct(AddProductRequest request) {
@@ -128,4 +137,21 @@ public class ProductServiceImpl implements IProductService {
     public Long countProductsByBrandAndName(String brand, String name) {
         return productRepository.countByBrandAndName(brand, name);
     }
+
+    @Override
+    public ProductDto convertToDto(Product product){
+        ProductDto productDto = modelMapper.map(product, ProductDto.class);
+        List<Image> images = imageRepository.findByProductId(product.getId());
+        List<ImageDto> imageDtos = images.stream().map(image -> modelMapper.map(image, ImageDto.class)).toList();
+        productDto.setImages(imageDtos);
+        return  productDto;
+    }
+
+    @Override
+    public List<ProductDto> getConvertedProducts(List<Product> products){
+        return products.stream().map(this::convertToDto).toList();
+    }
+
+
+
 }
